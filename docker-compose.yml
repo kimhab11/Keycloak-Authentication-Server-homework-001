@@ -15,7 +15,7 @@ x-keycloak-env: &keycloak-env
   KEYCLOAK_USER: admin
   KEYCLOAK_PASSWORD: kcpassword
   KEYCLOAK_LOGLEVEL: DEBUG
-  # KEYCLOAK_IMPORT: /opt/realm.json -Dkeycloak.profile.feature.upload_scripts=enabled
+  KEYCLOAK_IMPORT: /opt/realm.json -Dkeycloak.profile.feature.upload_scripts=enabled
   ROOT_LOGLEVEL: DEBUG
 
 volumes:
