@@ -1,7 +1,6 @@
 package com.example.webfluxdemo.router
 
 import com.example.webfluxdemo.handler.CloudInstanceHandler
-import com.example.webfluxdemo.handler.HelloHandler
 import com.example.webfluxdemo.handler.OSHandler
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -10,17 +9,7 @@ import org.springframework.web.reactive.function.server.ServerResponse
 import org.springframework.web.reactive.function.server.router
 
 @Configuration
-class Router(val handler: HelloHandler, val cloudInstanceHandler: CloudInstanceHandler, val osHandler: OSHandler) {
-
-    @Bean
-    fun helloWorld(): RouterFunction<ServerResponse> =
-        router {
-            GET("/api/v1/test", handler::sayHello)
-            GET("/api/v1/students/{name}/{age}", handler::findStudentById)
-            GET("/api/v1/students/search", handler::search)
-            POST("/api/v1/students", handler::createStudent)
-        }
-
+class Router(val cloudInstanceHandler: CloudInstanceHandler, val osHandler: OSHandler) {
     @Bean
     fun osRouter(): RouterFunction<ServerResponse> =
         router {
