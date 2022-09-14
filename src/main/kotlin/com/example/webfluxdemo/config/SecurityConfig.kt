@@ -1,3 +1,5 @@
+package com.example.webfluxdemo.config
+
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity
@@ -13,16 +15,15 @@ class SecurityConfig {
     fun filterChain(http: ServerHttpSecurity): SecurityWebFilterChain {
         return http
             .invoke{
-                cors{}
-                csrf{ disable() }
-                authorizeExchange{
-
-                    authorize("/api/v1/instance**", authenticated)
-                    authorize("/api/v1/os**", permitAll)
-                }
-                oauth2ResourceServer {
-                    jwt {  }
-                }
+            cors{}
+            csrf{ disable() }
+            authorizeExchange{
+                authorize("/api/v1/instance**", authenticated)
+                authorize("/api/v1/os**", permitAll)
             }
+            oauth2ResourceServer {
+                jwt {}
+            }
+        }
     }
 }
