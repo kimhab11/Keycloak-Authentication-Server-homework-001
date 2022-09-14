@@ -48,22 +48,4 @@ class HelloHandler(
         return ServerResponse.ok()
             .body(studentRequestMono, Student::class.java)
     }
-
-    fun createOperatingSystem(req: ServerRequest): Mono<ServerResponse> {
-        val osRequestMono = req.bodyToMono(OperatingSystemRequest::class.java)
-
-        val osResultMono: Mono<OperatingSystemDto> =
-            osRequestMono.flatMap {
-                operatingSystemService.save(it)
-            }
-
-        return ServerResponse.ok().body(osResultMono, OperatingSystem::class.java)
-    }
-
-    fun findAllOS(req:ServerRequest): Mono<ServerResponse> =
-        ServerResponse.ok().body(
-            operatingSystemService.findAll(),
-            OperatingSystem::class.java
-        )
-
 }
