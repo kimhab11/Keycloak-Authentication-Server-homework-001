@@ -18,8 +18,8 @@ class SecurityConfig {
             cors{}
             csrf{ disable() }
             authorizeExchange{
-                authorize("/api/v1/instance**", authenticated)
-                authorize("/api/v1/os**", permitAll)
+                authorize("/api/v1/instance/**", authenticated)
+                authorize("/api/v1/os**", authenticated)
             }
             oauth2ResourceServer {
                 jwt {}
