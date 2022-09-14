@@ -11,7 +11,6 @@ class UserClient {
     fun userClient(): WebClient =
         WebClient
             .builder()
-            .baseUrl("https://spring-reactive.hrd-edu.info")
+            .baseUrl("https://spring-reactive.hrd-edu.info") //
             .build()
-
 }
