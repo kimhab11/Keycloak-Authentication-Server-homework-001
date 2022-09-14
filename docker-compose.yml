@@ -61,8 +61,8 @@ services:
     image: jboss/keycloak:16.1.1
     restart: unless-stopped
     container_name: keycloak-server
-    #volumes:
-    #  - ../keycloak/realm.json:/opt/realm.json
+    volumes:
+      - ../keycloak/realm.json:/opt/realm.json
     environment:
       <<: *keycloak-env
     ports:
