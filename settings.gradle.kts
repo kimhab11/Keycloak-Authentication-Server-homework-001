@@ -1,1 +1,1 @@
-rootProject.name = "webFluxDemo"
+rootProject.name = "keycloakHomework"
