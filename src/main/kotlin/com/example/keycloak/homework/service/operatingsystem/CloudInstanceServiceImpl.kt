@@ -13,10 +13,26 @@ class CloudInstanceServiceImpl(
     val cloudInstanceRepository: CloudInstanceRepository,
     val operatingSystemRepository: OperatingSystemRepository
 ) : CloudInstanceService {
+    //    override fun create(cloudInstanceRequest: CloudInstanceRequest): Mono<CloudInstanceDto> {
+//        return cloudInstanceRepository
+//            .save(cloudInstanceRequest.toEntity())
+//            .map { res -> res.toDto() }
+//    }
     override fun create(cloudInstanceRequest: CloudInstanceRequest): Mono<CloudInstanceDto> {
-        return cloudInstanceRepository
+        val osMono = operatingSystemRepository.findById(cloudInstanceRequest.operatingSystemId)
+        val osDto = osMono.map { it.toDto() }
+
+        val cloudDto = cloudInstanceRepository
             .save(cloudInstanceRequest.toEntity())
             .map { res -> res.toDto() }
+        val result = cloudDto.zipWith(osDto)
+            .map {
+                val os = it.t2
+                val cloud = it.t1
+                cloud.operatingSystem = os
+                return@map cloud
+            }
+        return result
     }
 
     override fun findAll(): Flux<CloudInstanceDto> {
